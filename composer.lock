@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a81ea5a73ebc29fdd013d76177a616e",
+    "content-hash": "3f43a645b4cb3d85ae04049046b0845a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3005,16 +3005,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "1.4.5",
+            "version": "1.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "c210671197f6f8761c6ed0a765941940c474484c"
+                "reference": "5082ea8e531894dca7ffcee25206d93cd25aca42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/c210671197f6f8761c6ed0a765941940c474484c",
-                "reference": "c210671197f6f8761c6ed0a765941940c474484c",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/5082ea8e531894dca7ffcee25206d93cd25aca42",
+                "reference": "5082ea8e531894dca7ffcee25206d93cd25aca42",
                 "shasum": ""
             },
             "require": {
@@ -3022,7 +3022,7 @@
                 "ext-mbstring": "*",
                 "facade/flare-client-php": "^1.0",
                 "facade/ignition-contracts": "^1.0",
-                "filp/whoops": "^2.1.4",
+                "filp/whoops": "^2.4",
                 "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0",
                 "monolog/monolog": "^1.12|^2.0",
                 "php": "^7.1",
@@ -3069,7 +3069,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2019-09-03T21:12:03+00:00"
+            "time": "2019-09-04T19:13:40+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -3273,6 +3273,63 @@
                 "test"
             ],
             "time": "2016-01-20T08:20:44+00:00"
+        },
+        {
+            "name": "laravel/ui",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "15ac62a34c1b07a88da3eff2506ac6ae782c9803"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/15ac62a34c1b07a88da3eff2506ac6ae782c9803",
+                "reference": "15ac62a34c1b07a88da3eff2506ac6ae782c9803",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.8|^6.0",
+                "illuminate/filesystem": "~5.8|^6.0",
+                "illuminate/support": "~5.8|^6.0",
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ui\\UiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Ui\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel UI utilities and presets.",
+            "keywords": [
+                "laravel",
+                "ui"
+            ],
+            "time": "2019-09-02T16:34:23+00:00"
         },
         {
             "name": "mockery/mockery",
