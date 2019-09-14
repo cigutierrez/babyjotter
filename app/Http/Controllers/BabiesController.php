@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class BabiesController extends Controller
 {
+    // To make auth necessary for everything with babies
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class BabiesController extends Controller
      */
     public function index()
     {
-        //
+        $babies = auth()->user()->babies;
+
+        return view('babies.index', compact('babies'));
     }
 
     /**
@@ -24,7 +31,7 @@ class BabiesController extends Controller
      */
     public function create()
     {
-        //
+        return view('babies.create');
     }
 
     /**
@@ -35,7 +42,18 @@ class BabiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $this->validateBaby();
+
+        $validated['user_id'] = auth()->id();
+
+        $baby = Babies::create($validated);
+
+        // request()->validate([
+        //     'name' => 'required'
+        // ]);
+
+        return redirect('/babies');
     }
 
     /**
@@ -44,9 +62,15 @@ class BabiesController extends Controller
      * @param  \App\Babies  $babies
      * @return \Illuminate\Http\Response
      */
-    public function show(Babies $babies)
+    public function show(Babies $baby)
     {
-        //
+        $user = auth()->user();
+
+        // dd($user);
+        // Check to see if the user is the parent of the baby
+        $this->authorize('view', $baby);
+
+        return view('babies.show', compact('baby'));
     }
 
     /**
@@ -81,5 +105,18 @@ class BabiesController extends Controller
     public function destroy(Babies $babies)
     {
         //
+    }
+
+    /**
+     * Validate the form submission for creating babies
+     * 
+     * 
+     */
+    protected function validateBaby() {
+        return request()->validate([
+            'name' => ['required', 'min:1'],
+            'age' => ['required', 'min:1'],
+            'gender' => ['required']
+        ]);
     }
 }
