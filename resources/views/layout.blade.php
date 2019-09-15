@@ -7,6 +7,8 @@
     <title>@yield('title', 'Baby Logger')</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     <!-- Scripts -->
+     <script src="{{ asset('js/script.js') }}" defer></script>
 </head>
 <body>
     <div class="container-fluid">

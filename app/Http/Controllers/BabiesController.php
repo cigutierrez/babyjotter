@@ -49,8 +49,6 @@ class BabiesController extends Controller
         $date = date_create($validated['birthday']);
         $validated['birthday'] = $date;
 
-        dd($request);
-
         // Setting the user id
         $validated['user_id'] = auth()->id();
 
@@ -110,9 +108,13 @@ class BabiesController extends Controller
      * @param  \App\Babies  $babies
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Babies $babies)
+    public function destroy(Babies $baby)
     {
-        //
+        // Check to see if the user is the parent of the baby
+        $this->authorize('delete', $baby);
+
+        $baby->delete();
+        return redirect('/babies');
     }
 
     /**
