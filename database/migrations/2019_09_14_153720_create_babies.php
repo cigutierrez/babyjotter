@@ -18,6 +18,7 @@ class CreateBabies extends Migration
             // Needed for foreign key constraint for the users field
             $table->unsignedBigInteger('user_id');
             $table->string('name');
+            $table->date('birthday');
             $table->string('gender');
             $table->timestamps();
 

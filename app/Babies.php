@@ -10,6 +10,7 @@ class Babies extends Model
     protected $fillable = [
         'name',
         'gender',
+        'birthday',
         'user_id'
     ];
 

@@ -53,7 +53,7 @@ class BabyPolicy
      */
     public function update(User $user, Babies $babies)
     {
-        //
+        return $user->id == $babies->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class BabyPolicy
      */
     public function delete(User $user, Babies $babies)
     {
-        //
+        return $user->id == $babies->user_id;
     }
 
     /**

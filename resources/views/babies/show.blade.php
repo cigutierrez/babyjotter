@@ -6,12 +6,17 @@
             <div class="col-3">
                 <h1 class="display-2 text-center">{{ $baby->name }}</h1>
             </div>
+            <div class="col-3 align-self-center">
+                <h1 class="display-2 text-center">{{ $baby->gender }}</h1>
+            </div>
+
         </div>
 
         <!-- Feedings and stuff will go here -->
         <div class="row align-items-center mt-3">
             <div class="col-4">
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae necessitatibus velit rem saepe tempora eligendi! Laborum, non magni? Ut eius consectetur consequatur quia reprehenderit ducimus nemo aspernatur rem doloremque magni?</p>
+                <h2 class="text-center display-4">Birthday</h2>
+                <h3 class="text-center">{{ date_create($baby->birthday)->format("m/d/Y") }}</h3>
             </div>
             <div class="col-4">
                 <p class="lead">

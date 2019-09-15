@@ -45,13 +45,16 @@ class BabiesController extends Controller
 
         $validated = $this->validateBaby();
 
+        // Readjust the date - We might have to change this.
+        $date = date_create($validated['birthday']);
+        $validated['birthday'] = $date;
+
+        dd($request);
+
+        // Setting the user id
         $validated['user_id'] = auth()->id();
 
         $baby = Babies::create($validated);
-
-        // request()->validate([
-        //     'name' => 'required'
-        // ]);
 
         return redirect('/babies');
     }
@@ -64,9 +67,6 @@ class BabiesController extends Controller
      */
     public function show(Babies $baby)
     {
-        $user = auth()->user();
-
-        // dd($user);
         // Check to see if the user is the parent of the baby
         $this->authorize('view', $baby);
 
@@ -79,9 +79,12 @@ class BabiesController extends Controller
      * @param  \App\Babies  $babies
      * @return \Illuminate\Http\Response
      */
-    public function edit(Babies $babies)
+    public function edit(Babies $baby)
     {
-        //
+        // Check to see if the user is the parent of the baby
+        $this->authorize('view', $baby);
+
+        return view('babies.edit', compact('baby'));
     }
 
     /**
@@ -91,9 +94,14 @@ class BabiesController extends Controller
      * @param  \App\Babies  $babies
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Babies $babies)
+    public function update(Request $request, Babies $baby)
     {
-        //
+        // Check to see if the user is the parent of the baby
+        $this->authorize('update', $baby);
+
+        $baby->update($this->validateBaby());
+
+        return redirect('/babies');
     }
 
     /**
@@ -115,7 +123,7 @@ class BabiesController extends Controller
     protected function validateBaby() {
         return request()->validate([
             'name' => ['required', 'min:1'],
-            'age' => ['required', 'min:1'],
+            'birthday' => ['required'],
             'gender' => ['required']
         ]);
     }
