@@ -93,14 +93,14 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-window.onload = function () {
-  console.log('connected');
-  var deleteBaby = document.getElementById('deleteBaby');
-  deleteBaby.addEventListener('click', function (e) {
-    // Comeback to this
-    e.defaultPrevented;
-  });
-};
+// window.onload = function() {
+//     console.log('connected');
+//     let deleteBaby = document.getElementById('deleteBaby');
+//     deleteBaby.addEventListener('click', function(e) {
+//         // Comeback to this
+//         e.defaultPrevented;
+//     })
+// }
 
 /***/ }),
 

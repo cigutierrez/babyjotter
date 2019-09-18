@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::resource('babies', 'BabiesController');
 
+Route::resource('{id}/feedings', FeedingsController);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

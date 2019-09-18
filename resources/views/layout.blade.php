@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Baby Logger')</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
      <!-- Scripts -->
-     <script src="{{ asset('js/script.js') }}" defer></script>
+     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
     <div class="container-fluid">
         <h1 class="display-1 text-success text-center">Baby Jotter</h1>
     </div>
 
-    @yield('content')
+    <div id="app">
+        @yield('content')
+    </div>
+    
     
 </body>
 </html>

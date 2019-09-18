@@ -1,11 +1,11 @@
-window.onload = function() {
-    console.log('connected');
+// window.onload = function() {
+//     console.log('connected');
 
-    let deleteBaby = document.getElementById('deleteBaby');
+//     let deleteBaby = document.getElementById('deleteBaby');
 
-    deleteBaby.addEventListener('click', function(e) {
-        // Comeback to this
-        
-        e.defaultPrevented;
-    })
-}
+//     deleteBaby.addEventListener('click', function(e) {
+//         // Comeback to this
+
+//         e.defaultPrevented;
+//     })
+// }
