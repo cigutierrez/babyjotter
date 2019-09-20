@@ -37,8 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // A user has a baby
+    // A user has babies
     public function babies() {
-        return $this->hasMany(Babies::class, 'user_id');
+        return $this->hasMany(Baby::class, 'user_id');
     }
 }

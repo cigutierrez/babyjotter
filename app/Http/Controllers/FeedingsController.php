@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Baby;
 use App\Feedings;
 use Illuminate\Http\Request;
 
 class FeedingsController extends Controller
 {
+    // To make auth necessary for everything with feedings
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $baby = Baby::find($request->id);
+        $feedings = $baby->feedings();
+        // Show all the feedings
+        return view('feedings.show', compact('feedings'));
+
     }
 
     /**
@@ -25,6 +35,7 @@ class FeedingsController extends Controller
     public function create()
     {
         //
+        dd("Hello World");
     }
 
     /**
@@ -33,7 +44,7 @@ class FeedingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Babies $baby, Request $request)
     {
         //
     }

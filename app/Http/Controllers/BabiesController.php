@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Babies;
+use App\Baby;
 use Illuminate\Http\Request;
 
 class BabiesController extends Controller
@@ -52,7 +52,7 @@ class BabiesController extends Controller
         // Setting the user id
         $validated['user_id'] = auth()->id();
 
-        $baby = Babies::create($validated);
+        $baby = Baby::create($validated);
 
         return redirect('/babies');
     }
@@ -60,10 +60,10 @@ class BabiesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $Baby
      * @return \Illuminate\Http\Response
      */
-    public function show(Babies $baby)
+    public function show(Baby $baby)
     {
         // Check to see if the user is the parent of the baby
         $this->authorize('view', $baby);
@@ -74,10 +74,10 @@ class BabiesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $Baby
      * @return \Illuminate\Http\Response
      */
-    public function edit(Babies $baby)
+    public function edit(Baby $baby)
     {
         // Check to see if the user is the parent of the baby
         $this->authorize('view', $baby);
@@ -89,10 +89,10 @@ class BabiesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $Baby
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Babies $baby)
+    public function update(Request $request, Baby $baby)
     {
         // Check to see if the user is the parent of the baby
         $this->authorize('update', $baby);
@@ -105,10 +105,10 @@ class BabiesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $Baby
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Babies $baby)
+    public function destroy(Baby $baby)
     {
         // Check to see if the user is the parent of the baby
         $this->authorize('delete', $baby);

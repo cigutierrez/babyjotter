@@ -12,6 +12,8 @@ class Feedings extends Model
     // A feeding belongs to a baby
     public function baby()
     {
-        return $this->belongsTo(Babies::class);
+        return $this->hasOne(Baby::class);
     }
+
+
 }

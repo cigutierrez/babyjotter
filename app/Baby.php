@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Babies extends Model
+class Baby extends Model
 {
     // Allow for the following fields to be written to.
     protected $fillable = [

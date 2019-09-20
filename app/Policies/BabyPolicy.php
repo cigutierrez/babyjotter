@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\User;
-use App\Babies;
+use App\Baby;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BabyPolicy
@@ -25,12 +25,12 @@ class BabyPolicy
      * Determine whether the user can view the babies.
      *
      * @param  \App\User  $user
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $baby
      * @return mixed
      */
-    public function view(User $user, Babies $babies)
+    public function view(User $user, Baby $baby)
     {
-        return $user->id == $babies->user_id;
+        return $user->id == $baby->user_id;
     }
 
     /**
@@ -48,34 +48,34 @@ class BabyPolicy
      * Determine whether the user can update the babies.
      *
      * @param  \App\User  $user
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $Baby
      * @return mixed
      */
-    public function update(User $user, Babies $babies)
+    public function update(User $user, Baby $baby)
     {
-        return $user->id == $babies->user_id;
+        return $user->id == $baby->user_id;
     }
 
     /**
-     * Determine whether the user can delete the babies.
+     * Determine whether the user can delete the baby.
      *
      * @param  \App\User  $user
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $baby
      * @return mixed
      */
-    public function delete(User $user, Babies $babies)
+    public function delete(User $user, Baby $baby)
     {
-        return $user->id == $babies->user_id;
+        return $user->id == $baby->user_id;
     }
 
     /**
      * Determine whether the user can restore the babies.
      *
      * @param  \App\User  $user
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $baby
      * @return mixed
      */
-    public function restore(User $user, Babies $babies)
+    public function restore(User $user, Baby $baby)
     {
         //
     }
@@ -84,10 +84,10 @@ class BabyPolicy
      * Determine whether the user can permanently delete the babies.
      *
      * @param  \App\User  $user
-     * @param  \App\Babies  $babies
+     * @param  \App\Baby  $baby
      * @return mixed
      */
-    public function forceDelete(User $user, Babies $babies)
+    public function forceDelete(User $user, Baby $baby)
     {
         //
     }
