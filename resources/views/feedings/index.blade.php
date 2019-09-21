@@ -8,8 +8,20 @@
                 <h1>{{ $feeding->created_at }}</h1>
                 <p class="lead">{{ $feeding->type }}</p>
             </div>
-            <div class="col-2">
-                <a href="#" class="btn btn-success btn-block">Edit</a>
+            <div class="col-1">
+                <a href="/babies/{{ $id }}/feedings/{{ $feeding->id }}/" class="btn btn-primary btn-block">Details</a>
+            </div>
+            <div class="col-1">
+                <a href="/babies/{{ $id }}/feedings/{{ $feeding->id }}/edit" class="btn btn-success btn-block">Edit</a>
+            </div>
+            <div class="col-1">
+                <!-- Delete Button -->
+                <form action="/babies/{{ $id }}/feedings/{{ $feeding->id }}" method="post">
+                    @method('DELETE')
+                    @csrf
+
+                    <button id="deleteFeeding" class="btn btn-danger btn-block">DELETE</button>
+                </form>
             </div>
         </div>
         @endforeach

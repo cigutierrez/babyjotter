@@ -21,6 +21,7 @@ class FeedingsController extends Controller
      */
     public function index($id)
     {
+        // Verify the user is the parent of the baby.
         $baby = $this->findBaby($id);
         
         // Get all of the feedings
@@ -79,9 +80,12 @@ class FeedingsController extends Controller
      * @param  \App\Feedings  $feedings
      * @return \Illuminate\Http\Response
      */
-    public function show(Feedings $feedings)
+    public function show(Request $request, $baby_id, Feedings $feeding)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        return view('feedings.show', compact('feeding'));
     }
 
     /**
@@ -90,9 +94,14 @@ class FeedingsController extends Controller
      * @param  \App\Feedings  $feedings
      * @return \Illuminate\Http\Response
      */
-    public function edit(Feedings $feedings)
+    public function edit(Request $request, $baby_id, Feedings $feeding)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+
+        // Return a view with the feeding and baby_id
+        return view('feedings.edit', ['feeding' => $feeding, 'baby_id' => $baby_id]);
     }
 
     /**
@@ -102,9 +111,17 @@ class FeedingsController extends Controller
      * @param  \App\Feedings  $feedings
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Feedings $feedings)
+    public function update(FeedingRequest $request, $baby_id, Feedings $feeding)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        $validated = $request->validated();
+
+        $feeding->update($validated);
+        return redirect('/babies/'.$request->babyId.'/feedings');
+
+        return $request;
     }
 
     /**
@@ -113,12 +130,20 @@ class FeedingsController extends Controller
      * @param  \App\Feedings  $feedings
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Feedings $feedings)
+    public function destroy(Request $request, $baby_id, Feedings $feeding)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        // Delete the feeding
+        $feeding->delete();
+
+        // return back to the feedings page
+        return redirect("/babies/".$baby_id."/feedings");
     }
 
     // Protected functions
+    // This is our custom policy basically.
     protected function findBaby($id)
     {
         // Search for the baby
