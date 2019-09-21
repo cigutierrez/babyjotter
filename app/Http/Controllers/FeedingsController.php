@@ -4,26 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Baby;
 use App\Feedings;
+use App\Http\Requests\FeedingRequest;
 use Illuminate\Http\Request;
 
 class FeedingsController extends Controller
 {
     // To make auth necessary for everything with feedings
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($id)
     {
-        $baby = Baby::find($request->id);
-        $feedings = $baby->feedings();
-        // Show all the feedings
-        return view('feedings.show', compact('feedings'));
+        $baby = $this->findBaby($id);
+        
+        // Get all of the feedings
+        $feedings = $baby->feedings;
+        // return $feedings;
+
+        return view('feedings.index', compact(['feedings', 'id']));
+
 
     }
 
@@ -32,10 +37,10 @@ class FeedingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
-        dd("Hello World");
+        return view('feedings.create', ['id' => $id]);
     }
 
     /**
@@ -44,9 +49,28 @@ class FeedingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Babies $baby, Request $request)
+    public function store(FeedingRequest $request)
     {
         //
+        $validated = $request->validated();
+        // Setting the user id
+        $validated['baby_id'] = $request->babyId; 
+
+        // Check to see if things exist
+        // If this is a formula, then breast should not be filled out
+        if (array_key_exists('breast', $validated) == false)
+        {
+            $validated['breast'] = 0;
+        }
+        // If this is a breast feeding
+        if (array_key_exists('amount', $validated) == false)
+        {
+            $validated['amount'] = 0;
+            $validated['measurement'] = 0;
+        }
+
+        $feeding = Feedings::create($validated);
+        return redirect('/babies/'.$request->babyId.'/feedings');
     }
 
     /**
@@ -92,5 +116,15 @@ class FeedingsController extends Controller
     public function destroy(Feedings $feedings)
     {
         //
+    }
+
+    // Protected functions
+    protected function findBaby($id)
+    {
+        // Search for the baby
+        $baby = Baby::find($id);
+
+        $this->authorize('view', $baby);
+        return $baby;
     }
 }

@@ -7,6 +7,9 @@
             <a href="/babies" class="btn btn-primary btn-lg">Babies</a>
         </div>
         <div class="col-2">
+            <a href="/babies/{{ $baby->id }}/feedings" class="btn btn-primary btn-lg">Feedings</a>
+        </div>
+        <div class="col-2">
             <a href="/babies/{{ $baby->id }}/edit" class="btn btn-primary btn-lg">Edit</a>
         </div>
         <div class="col-2">
