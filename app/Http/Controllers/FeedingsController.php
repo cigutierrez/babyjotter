@@ -54,6 +54,7 @@ class FeedingsController extends Controller
     {
         //
         $validated = $request->validated();
+        // return $validated;
         // Setting the user id
         $validated['baby_id'] = $request->babyId; 
 
@@ -64,7 +65,7 @@ class FeedingsController extends Controller
             $validated['breast'] = 0;
         }
         // If this is a breast feeding
-        if (array_key_exists('amount', $validated) == false)
+        if (array_key_exists('amount', $validated) == false || $validated['amount'] == null)
         {
             $validated['amount'] = 0;
             $validated['measurement'] = 0;
@@ -121,7 +122,7 @@ class FeedingsController extends Controller
         $feeding->update($validated);
         return redirect('/babies/'.$request->babyId.'/feedings');
 
-        return $request;
+        // return $request;
     }
 
     /**
