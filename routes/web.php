@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,6 +23,9 @@ Route::resource('/babies/{id}/feedings', 'FeedingsController');
 
 // Naps
 Route::resource('/babies/{id}/naps', 'NapsController');
+
+// Diapers
+Route::resource('/babies/{id}/diapers', 'DiapersController');
 
 Auth::routes();
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWetDiapers extends Migration
+class CreateDiapers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateWetDiapers extends Migration
      */
     public function up()
     {
-        Schema::create('wet_diapers', function (Blueprint $table) {
+        Schema::create('diapers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('baby_id');
             $table->string('type');
-            $table->string('notes');
+            $table->text('notes');
             
             $table->timestamps();
 
             $table->foreign('baby_id')->references('id')->on('babies');
+            
         });
     }
 
@@ -32,6 +33,6 @@ class CreateWetDiapers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wet_diapers');
+        Schema::dropIfExists('diapers');
     }
 }

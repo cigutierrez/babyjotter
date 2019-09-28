@@ -1,0 +1,14 @@
+Users -> done
+Babies -> done
+Naps -> done
+Wet Diapers ->
+Medications ->
+
+Front End:
+    1. Still waiting for Gabe to finish
+    2. Currently using Bootstrap 4 for quick prototyping.
+    3. Make sure to change homepage and users page as well. If anything, just give the option to change password and name.
+
+JavaScript (or PHP) to do list:
+    1. Make it so that the total on naps gets automatically calculated after the user finishes entering in the end time. I am thinking either a button or it will do it automatically.
+    2. On Feedings, maybe add a start feeding button, and then make it show an end feeding button. So basically the user can go to that page, click on start feeding, then end feeding, and then submit it and the length of feeding gets automatically filled out.

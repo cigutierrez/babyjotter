@@ -36,6 +36,12 @@ class Baby extends Model
         return $this->hasMany(Medications::class);
     }
 
+    // A baby has diapers
+    public function diapers()
+    {
+        return $this->hasMany(Diapers::class);
+    }
+
     // A baby has naps
     public function naps()
     {
