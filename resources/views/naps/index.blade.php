@@ -22,8 +22,11 @@
                 <p class="lead">{{ $nap->notes }}</p>
             </div>
             <div class="col-1">
+                <a href="/babies/{{ $nap->baby_id }}/naps/{{ $nap->id }}/edit" class="btn btn-success btn-block">Edit</a>
+            </div>
+            <div class="col-1">
                 <!-- Delete Button -->
-                <form action="/babies/{{ $nap->baby_id }}/feedings/{{ $nap->id }}" method="post">
+                <form action="/babies/{{ $nap->baby_id }}/naps/{{ $nap->id }}" method="post">
                     @method('DELETE')
                     @csrf
 

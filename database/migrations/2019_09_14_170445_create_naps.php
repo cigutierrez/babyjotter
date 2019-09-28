@@ -18,7 +18,7 @@ class CreateNaps extends Migration
             $table->unsignedBigInteger('baby_id');
             $table->time('start_time');
             $table->time('end_time');
-            $table->time('total');
+            $table->decimal('total');
             $table->text('notes');
             
             $table->timestamps();

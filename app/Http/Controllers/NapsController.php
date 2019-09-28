@@ -26,7 +26,7 @@ class NapsController extends Controller
 
         // Get all of the naps
         $naps = $baby->naps;
-        
+
         return view('naps.index', compact('naps', 'baby_id'));
     }
 
@@ -81,9 +81,11 @@ class NapsController extends Controller
      * @param  \App\Naps  $naps
      * @return \Illuminate\Http\Response
      */
-    public function show(Naps $naps)
+
+    // We do not need this route at all because we show all of the information in the index. Redirect to the index
+    public function show($baby_id, Naps $nap)
     {
-        //
+        return redirect('/babies/'.$baby_id.'/naps');
     }
 
     /**
@@ -92,9 +94,12 @@ class NapsController extends Controller
      * @param  \App\Naps  $naps
      * @return \Illuminate\Http\Response
      */
-    public function edit(Naps $naps)
+    public function edit($baby_id, Naps $nap)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        return view('naps.edit', compact('nap'));
     }
 
     /**
@@ -104,9 +109,20 @@ class NapsController extends Controller
      * @param  \App\Naps  $naps
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Naps $naps)
+    public function update(Request $request, $baby_id, Naps $nap)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        // Validate the request
+        $validated = $this->validateNap();
+
+        // Update the nap
+        $nap->update($validated);
+
+        return redirect('/babies/'.$baby_id.'/naps');
+
+
     }
 
     /**
@@ -115,9 +131,15 @@ class NapsController extends Controller
      * @param  \App\Naps  $naps
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Naps $naps)
+    public function destroy($baby_id, Naps $nap)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        // Delete the nap
+        $nap->delete();
+
+        return redirect('/babies/'.$baby_id.'/naps');
     }
 
     // Protected functions
