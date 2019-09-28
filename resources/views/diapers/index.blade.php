@@ -12,23 +12,23 @@
         @endif
         @foreach($diapers as $diaper)
         <div class="row mt-3 justify-content-center">
-            <div class="col-6 text-center">
-                <h1>Type: {{ $diaper->type }}</h1>
+            <div class="col-3 text-center">
+                <h1>{{ $diaper->type }}</h1>
             </div>
             <div class="col-3">
                 <h2>Notes</h2>
                 <p class="lead">{{ $diaper->notes }}</p>
             </div>
             <div class="col-1">
-                <a href="/babies/{{ $diaper->baby_id }}/naps/{{ $diaper->id }}/edit" class="btn btn-success btn-block">Edit</a>
+                <a href="/babies/{{ $diaper->baby_id }}/diapers/{{ $diaper->id }}/edit" class="btn btn-success btn-block">Edit</a>
             </div>
             <div class="col-1">
                 <!-- Delete Button -->
-                <form action="/babies/{{ $diaper->baby_id }}/naps/{{ $diaper->id }}" method="post">
+                <form action="/babies/{{ $diaper->baby_id }}/diapers/{{ $diaper->id }}" method="post">
                     @method('DELETE')
                     @csrf
 
-                    <button id="deleteFeeding" class="btn btn-danger btn-block">DELETE</button>
+                    <button id="deleteDiaper" class="btn btn-danger btn-block">DELETE</button>
                 </form>
             </div>
         </div>

@@ -24,7 +24,7 @@ class DiapersController extends Controller
         // Verify that the user is the parent of the baby
         $baby = $this->findBaby($baby_id);
 
-        // Get all of the naps
+        // Get all of the diapers
         $diapers = $baby->diapers;
 
         return view('diapers.index', compact('diapers', 'baby_id'));
@@ -40,7 +40,7 @@ class DiapersController extends Controller
         // Verify that the user is the parent of the baby
         $baby = $this->findBaby($baby_id);
 
-        // Return the create nap page.
+        // Return the create diapers page.
         return view('diapers.create', ['id' => $baby_id]);
     }
 
@@ -68,7 +68,7 @@ class DiapersController extends Controller
         // Save the baby_id
         $validated['baby_id'] = $baby_id;
 
-        // Create a new nap
+        // Create a new diaper
         $diaper = Diapers::create($validated);
 
         return redirect('/babies/'.$baby_id.'/diapers');
@@ -81,9 +81,10 @@ class DiapersController extends Controller
      * @param  \App\Diapers  $diapers
      * @return \Illuminate\Http\Response
      */
-    public function show(Diapers $diapers)
+    // We do not need this route at all because we show all of the information in the index. Redirect to the index
+    public function show($baby_id, Diapers $diapers)
     {
-        //
+        return redirect('/babies/'.$baby_id.'/diapers');
     }
 
     /**
@@ -92,9 +93,12 @@ class DiapersController extends Controller
      * @param  \App\Diapers  $diapers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Diapers $diapers)
+    public function edit($baby_id, Diapers $diaper)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        return view('diapers.edit', compact('diaper'));
     }
 
     /**
@@ -104,9 +108,18 @@ class DiapersController extends Controller
      * @param  \App\Diapers  $diapers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diapers $diapers)
+    public function update(Request $request, $baby_id, Diapers $diaper)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        // Validate the request
+        $validated = $this->validateDiaper();
+
+        // Update the diaper
+        $diaper->update($validated);
+
+        return redirect('/babies/'.$baby_id.'/diapers');
     }
 
     /**
@@ -115,9 +128,15 @@ class DiapersController extends Controller
      * @param  \App\Diapers  $diapers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diapers $diapers)
+    public function destroy($baby_id, Diapers $diaper)
     {
-        //
+        // Verify that the user is the parent of the baby
+        $baby = $this->findBaby($baby_id);
+
+        // Delete the diaper
+        $diaper->delete();
+
+        return redirect('/babies/'.$baby_id.'/diapers');
     }
 
     // Protected functions
@@ -131,7 +150,7 @@ class DiapersController extends Controller
         return $baby;
     }
 
-    // What we are using to validate the nap
+    // What we are using to validate the diaper
     protected function validateDiaper() {
         return request()->validate([
             'type' => ['required'],
