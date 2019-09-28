@@ -32,6 +32,9 @@
             <div class="col-2 px-0">
                 <a href="/babies" class="btn btn-primary">Babies</a>
             </div>
+            <div class="col-2 px-0">
+                <a href="/babies/{{ $id }}" class="btn btn-primary">Back</a>
+            </div>
         </div>
         
     </div>

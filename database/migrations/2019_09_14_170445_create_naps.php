@@ -19,7 +19,7 @@ class CreateNaps extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->time('total');
-            $table->string('notes');
+            $table->text('notes');
             
             $table->timestamps();
             $table->foreign('baby_id')->references('id')->on('babies');
