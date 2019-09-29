@@ -59,27 +59,29 @@ class MedicationsController extends Controller
 
         $validated = $request->validated();
 
-        // Check to see if the optional fields were included aka not null
-        if ($validated['how_often'] == null) 
-        {
-            $validated['how_often'] = 0;
-        }
-        if ($validated['times_per_day'] == null) 
-        {
-            $validated['times_per_day'] = 0;
-        }
-        if ($validated['amount'] == null)
-        {
-            $validated['amount'] = 0;
-        }
-        if (array_key_exists('measurement', $validated) == false || $validated['measurement'] == null)
-        {
-            $validated['measurement'] = 0;
-        }
-        if ($validated['notes'] == null)
-        {
-            $validated['notes'] = "";
-        }
+        $validated = $this->fillEmptyFields($validated);
+
+        // // Check to see if the optional fields were included aka not null
+        // if ($validated['how_often'] == null) 
+        // {
+        //     $validated['how_often'] = 0;
+        // }
+        // if ($validated['times_per_day'] == null) 
+        // {
+        //     $validated['times_per_day'] = 0;
+        // }
+        // if ($validated['amount'] == null)
+        // {
+        //     $validated['amount'] = 0;
+        // }
+        // if (array_key_exists('measurement', $validated) == false || $validated['measurement'] == null)
+        // {
+        //     $validated['measurement'] = 0;
+        // }
+        // if ($validated['notes'] == null)
+        // {
+        //     $validated['notes'] = "";
+        // }
 
         // Need to add the baby_id onto validated
         $validated['baby_id'] = $baby_id;
@@ -97,11 +99,14 @@ class MedicationsController extends Controller
      * @param  \App\Medications  $medications
      * @return \Illuminate\Http\Response
      */
+    // We do not need this route at all because we show all of the information in the index. Redirect to the index
     public function show($baby_id, Medications $medications)
     {
         //
         // Verify that the user is the parent of the baby
         $baby = $this->findBaby($baby_id);
+
+        return redirect('/babies/'.$baby_id.'/medications');
     }
 
     /**
@@ -110,11 +115,12 @@ class MedicationsController extends Controller
      * @param  \App\Medications  $medications
      * @return \Illuminate\Http\Response
      */
-    public function edit($baby_id, Medications $medications)
+    public function edit($baby_id, Medications $medication)
     {
-        //
         // Verify that the user is the parent of the baby
         $baby = $this->findBaby($baby_id);
+
+        return view('medications.edit', compact('medication'));
     }
 
     /**
@@ -124,11 +130,22 @@ class MedicationsController extends Controller
      * @param  \App\Medications  $medications
      * @return \Illuminate\Http\Response
      */
-    public function update(MedicationRequest $request, $baby_id, Medications $medications)
+    public function update(MedicationRequest $request, $baby_id, Medications $medication)
     {
         //
         // Verify that the user is the parent of the baby
         $baby = $this->findBaby($baby_id);
+
+        $validated = $request->validated();
+
+        // Fill the empty fields with 0's
+        $validated = $this->fillEmptyFields($validated);
+
+        // Update the medication
+        $medication->update($validated);
+
+        return redirect('/babies/'.$baby_id.'/medications');
+
     }
 
     /**
@@ -137,11 +154,15 @@ class MedicationsController extends Controller
      * @param  \App\Medications  $medications
      * @return \Illuminate\Http\Response
      */
-    public function destroy($baby_id, Medications $medications)
+    public function destroy($baby_id, Medications $medication)
     {
-        //
         // Verify that the user is the parent of the baby
         $baby = $this->findBaby($baby_id);
+
+        // Delete the medication
+        $medication->delete();
+
+        return redirect('/babies/'.$baby_id.'/medications');
     }
 
     // Protected functions
@@ -153,5 +174,32 @@ class MedicationsController extends Controller
 
         $this->authorize('view', $baby);
         return $baby;
+    }
+
+    protected function fillEmptyFields($data)
+    {
+        // Check to see if the optional fields were included aka not null
+        if ($data['how_often'] == null) 
+        {
+            $data['how_often'] = 0;
+        }
+        if ($data['times_per_day'] == null) 
+        {
+            $data['times_per_day'] = 0;
+        }
+        if ($data['amount'] == null)
+        {
+            $data['amount'] = 0;
+        }
+        if (array_key_exists('measurement', $data) == false || $data['measurement'] == null)
+        {
+            $data['measurement'] = "";
+        }
+        if ($data['notes'] == null)
+        {
+            $data['notes'] = "";
+        }
+
+        return $data;
     }
 }

@@ -2,20 +2,53 @@
 
 @section('content')
     <div class="container-fluid">
+        @if(count($medications) < 1)
+        <div class="row mt-3 justify-content-center">
+            <div class="col-6 text-center">
+                <h1>No Medications Found!</h1>
+            </div>
+        </div>
+        @endif
         @foreach($medications as $med)
         <div class="row mt-3 justify-content-center">
-            <div class="col-3 text-center">
+            <div class="col-2 text-center">
                 <h1>{{ $med->type }}</h1>
             </div>
-            <div class="col-1">
-                <a href="/babies/{{ $baby_id }}/feedings/{{ $med->id }}/" class="btn btn-primary btn-block">Details</a>
+            <div class="col-2 text-center">
+                <h1>{{ $med->name }}</h1>
             </div>
+            <!-- Conditionally render the how_often, times_per_day, amount, measurement, and notes -->
+            @if($med->how_often > 0)
+            <div class="col-2 text-center">
+                <h5>How Often: {{ $med->how_often }}</h5>
+            </div>
+            @endif
+            @if($med->times_per_day > 0)
+            <div class="col-2 text-center">
+                <h5>Times Per Day:{{ $med->times_per_day }}</h5>
+            </div>
+            @endif
+            @if($med->amount > 0)
+            <div class="col-2 text-center">
+                <h5>Amount: {{ $med->amount }}</h5>
+            </div>
+            @endif
+            @if($med->measurement != "")
+            <div class="col-2 text-center">
+                <h5>Measurement: {{ $med->measurement }}</h5>
+            </div>
+            @endif
+            @if($med->notes != "")
+            <div class="col-2 text-center">
+                <h5>Notes: {{ $med->notes }}</h5>
+            </div>
+            @endif
             <div class="col-1">
-                <a href="/babies/{{ $baby_id }}/feedings/{{ $med->id }}/edit" class="btn btn-success btn-block">Edit</a>
+                <a href="/babies/{{ $baby_id }}/medications/{{ $med->id }}/edit" class="btn btn-success btn-block">Edit</a>
             </div>
             <div class="col-1">
                 <!-- Delete Button -->
-                <form action="/babies/{{ $baby_id }}/feedings/{{ $med->id }}" method="post">
+                <form action="/babies/{{ $baby_id }}/medications/{{ $med->id }}" method="post">
                     @method('DELETE')
                     @csrf
 
