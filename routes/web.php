@@ -27,6 +27,9 @@ Route::resource('/babies/{id}/naps', 'NapsController');
 // Diapers
 Route::resource('/babies/{id}/diapers', 'DiapersController');
 
+// Medications
+Route::resource('/babies/{id}/medications', 'MedicationsController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

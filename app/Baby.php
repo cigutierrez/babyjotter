@@ -31,7 +31,7 @@ class Baby extends Model
     }
 
     // A baby has medication
-    public function medication() 
+    public function medications() 
     {
         return $this->hasMany(Medications::class);
     }

@@ -18,11 +18,11 @@ class CreateMedications extends Migration
             $table->unsignedBigInteger('baby_id');
             $table->string('type');
             $table->string('name');
-            $table->time('how_often');
+            $table->decimal('how_often');
             $table->integer('times_per_day');
             $table->decimal('amount', 4, 3);
             $table->string('measurement');
-            $table->string('notes');
+            $table->text('notes');
             
             $table->timestamps();
 
