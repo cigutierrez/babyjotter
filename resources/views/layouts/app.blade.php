@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'My Baby Jotter') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,30 +18,40 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app" class="p-0 m-0">
+
+        <section id="bannerSection">
+            <div class="container mt-3">
+                <div class="row text-center bannerBorder">
+                    <div class="col">
+                        <img src="/images/_0005_Logo.png" alt="My Baby Jotter Logo" id="banner" class="p-3" height="250">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <nav class="navbar navbar-expand-md navbar-light navbar-dark text-white bg-transparent">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand h1" href="{{ url('/') }}">
+                {{ config('app.name', 'My Baby Jotter') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
+                    <!-- <ul class="navbar-nav mr-auto"></ul> -->
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <!-- <ul class="navbar-nav ml-auto"> -->
                         <!-- Authentication Links -->
-                        @guest
+                        <!-- @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link h3" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -70,9 +80,9 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
 
-        <main class="py-4">
+        <main class="py-4 container">
             @yield('content')
         </main>
     </div>

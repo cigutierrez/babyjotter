@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Baby Logger')</title>
+    <title>@yield('title', 'My Baby Jotter')</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
      <!-- Scripts -->
@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1 class="display-1 text-success text-center">Baby Jotter</h1>
+        <h1 class="display-1 text-success text-center">My Baby Logger</h1>
     </div>
 
     <div id="app">
