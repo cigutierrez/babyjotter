@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,13 +21,38 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app" class="p-0 m-0">
-
+        <!-- Banner Section -->
         <section id="bannerSection">
             <div class="container mt-3">
-                <div class="row text-center bannerBorder">
-                    <div class="col">
+                <div class="row text-center justify-content-end bannerBorder">
+                    <div class="col-2 order-2 align-self-start">
+                        @guest
+                            <a class="btn btn-block btn-light textPrimary mt-3" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            @if (Route::has('register'))
+                                <a class="btn btn-block btn-light text-center textPrimary mt-1" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            @endif
+                            @else
+                                <!-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a> -->
+
+                                <a class="btn btn-block text-white customBtn textPrimary mt-3" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+
+                                <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    </div> -->
+                        @endguest
+                    </div>
+                    <div class="col-9 order-1">
                         <img src="/images/_0005_Logo.png" alt="My Baby Jotter Logo" id="banner" class="p-3" height="250">
                     </div>
                 </div>
@@ -43,13 +69,13 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-                    <!-- Left Side Of Navbar -->
-                    <!-- <ul class="navbar-nav mr-auto"></ul> -->
+        <!-- Left Side Of Navbar -->
+        <!-- <ul class="navbar-nav mr-auto"></ul> -->
 
-                    <!-- Right Side Of Navbar -->
-                    <!-- <ul class="navbar-nav ml-auto"> -->
-                        <!-- Authentication Links -->
-                        <!-- @guest
+        <!-- Right Side Of Navbar -->
+        <!-- <ul class="navbar-nav ml-auto"> -->
+        <!-- Authentication Links -->
+        <!-- @guest
                             <li class="nav-item">
                                 <a class="nav-link h3" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -66,8 +92,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -87,4 +113,5 @@
         </main>
     </div>
 </body>
+
 </html>
