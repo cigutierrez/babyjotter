@@ -16,12 +16,8 @@ class CreateMedications extends Migration
         Schema::create('medications', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('baby_id');
-            $table->string('type');
             $table->string('name');
-            $table->decimal('how_often');
-            $table->integer('times_per_day');
-            $table->decimal('amount', 4, 3);
-            $table->string('measurement');
+            $table->string('amount');
             $table->text('notes');
             
             $table->timestamps();

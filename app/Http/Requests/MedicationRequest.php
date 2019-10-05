@@ -24,14 +24,8 @@ class MedicationRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required',
             'name' => 'required',
-            // how_often is optional because not all medications have this.
-            'how_often' =>  [],
-            // times_per_day is optional because not all medications specify this.
-            'times_per_day' => [],
-            'amount' => 'required_if:type,==,liquid',
-            'measurement' => 'required_if:type,==,liquid',
+            'amount' => 'required',
             'notes' => []
         ];
     }

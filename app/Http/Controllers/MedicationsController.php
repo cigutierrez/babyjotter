@@ -61,34 +61,12 @@ class MedicationsController extends Controller
 
         $validated = $this->fillEmptyFields($validated);
 
-        // // Check to see if the optional fields were included aka not null
-        // if ($validated['how_often'] == null) 
-        // {
-        //     $validated['how_often'] = 0;
-        // }
-        // if ($validated['times_per_day'] == null) 
-        // {
-        //     $validated['times_per_day'] = 0;
-        // }
-        // if ($validated['amount'] == null)
-        // {
-        //     $validated['amount'] = 0;
-        // }
-        // if (array_key_exists('measurement', $validated) == false || $validated['measurement'] == null)
-        // {
-        //     $validated['measurement'] = 0;
-        // }
-        // if ($validated['notes'] == null)
-        // {
-        //     $validated['notes'] = "";
-        // }
-
         // Need to add the baby_id onto validated
         $validated['baby_id'] = $baby_id;
 
         $med = Medications::create($validated);
 
-        return $med;
+        return redirect('/babies/'.$baby_id.'/medications/');
 
         
     }
@@ -178,23 +156,6 @@ class MedicationsController extends Controller
 
     protected function fillEmptyFields($data)
     {
-        // Check to see if the optional fields were included aka not null
-        if ($data['how_often'] == null) 
-        {
-            $data['how_often'] = 0;
-        }
-        if ($data['times_per_day'] == null) 
-        {
-            $data['times_per_day'] = 0;
-        }
-        if ($data['amount'] == null)
-        {
-            $data['amount'] = 0;
-        }
-        if (array_key_exists('measurement', $data) == false || $data['measurement'] == null)
-        {
-            $data['measurement'] = "";
-        }
         if ($data['notes'] == null)
         {
             $data['notes'] = "";

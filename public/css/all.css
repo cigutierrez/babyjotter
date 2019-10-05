@@ -76,3 +76,7 @@ body {
 .customBtn:hover {
     transform: scale(1.05);
 }
+
+.historyBox {
+    border: 5px solid white;
+}
