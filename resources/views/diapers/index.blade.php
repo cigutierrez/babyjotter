@@ -1,51 +1,58 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
-        <!-- If there are no naps (e.g. $naps is empty) -->
-        @if(count($diapers) == 0)
-            <div class="row mt-3 justify-content-center">
-                <div class="col text-center">
-                    <h1>No diapers entered!</h1>
-                </div>
-            </div>
-        @endif
-        @foreach($diapers as $diaper)
-        <div class="row mt-3 justify-content-center">
-            <div class="col-3 text-center">
-                <h1>{{ $diaper->type }}</h1>
-            </div>
-            <div class="col-3">
-                <h2>Notes</h2>
-                <p class="lead">{{ $diaper->notes }}</p>
-            </div>
-            <div class="col-1">
-                <a href="/babies/{{ $diaper->baby_id }}/diapers/{{ $diaper->id }}/edit" class="btn btn-success btn-block">Edit</a>
-            </div>
-            <div class="col-1">
-                <!-- Delete Button -->
-                <form action="/babies/{{ $diaper->baby_id }}/diapers/{{ $diaper->id }}" method="post">
-                    @method('DELETE')
-                    @csrf
 
-                    <button id="deleteDiaper" class="btn btn-danger btn-block">DELETE</button>
-                </form>
-            </div>
+<!-- Diaper Controls -->
+<div class="row text-center justify-content-center mt-4" id="babyIconContainer">
+    <!-- Enter a new Diaper -->
+    <div class="col-md-3 py-3">
+        <a href="/babies/{{ $baby_id}}/diapers/create">
+            <img src="/icons/diaper_poop.png" alt="Diapers Icon" class="babyBtns" height=150 width=150>
+        </a>
+    </div>
+    <div class="col-md-3 py-3">
+        <a href="/babies/{{ $baby_id}}/diapers/create">
+            <img src="/icons/diaper_pee.png" alt="Diapers Icon" class="babyBtns" height=150 width=150>
+        </a>
+    </div>
+    <div class="col-12">
+        <h4 class="textPrimary">Enter New Diaper</h4>
+    </div>
+</div>
+
+@if(count($diapers) < 1) <div class="row mt-3 justify-content-center">
+    <div class="col-6 text-center">
+        <h1 class="textPrimary">No Diapers Found!</h1>
+    </div>
+    </div>
+    @endif
+
+    @foreach($diapers as $diaper)
+    <div class="row mt-3 justify-content-between historyBox align-items-center shadow">
+        <div class="col-md-4 text-center pt-2">
+            <h5>Notes: {{ $diaper->notes }}</h5>
         </div>
-        @endforeach
-        <div class="row justify-content-center mt-5">
-            <div class="col-2 px-0">
-                <!-- We can use $naps[0] because all of the naps belong to the same baby -->
-                <!-- Actually we can't use that because if there are no existing naps, we receive an error. -->
-                <a href="/babies/{{$baby_id}}/diapers/create" class="btn btn-primary">Enter Diaper</a>
-            </div>
-            <div class="col-2 px-0">
-                <a href="/babies" class="btn btn-primary">Babies</a>
-            </div>
-            <div class="col-2 px-0">
-                <a href="/babies/{{ $baby_id }}" class="btn btn-primary">Back</a>
-            </div>
+        <div class="col-md-2 my-2">
+            <a href="/babies/{{ $baby_id }}/diapers/{{ $diaper->id }}/edit" class="btn btn-outline-success btn-block">Edit</a>
+        </div>
+        <div class="col-md-2 my-md-2 mt-2">
+            <!-- Delete Button -->
+            <form action="/babies/{{ $baby_id }}/diapers/{{ $diaper->id }}" method="post">
+                @method('DELETE')
+                @csrf
+
+                <button id="deleteFeeding" class="btn btn-outline-danger btn-block">DELETE</button>
+            </form>
+        </div>
+    </div>
+    @endforeach
+
+
+    <!-- Back Button -->
+    <div class="row justify-content-center mt-5">
+        <div class="col">
+            <a href="/babies/{{ $baby_id }}" class="btn btn-light btn-block shadow textPrimary">Back</a>
         </div>
     </div>
 
-@endsection
+    @endsection

@@ -4,8 +4,8 @@
 
 <!-- Medication Controls -->
 <div class="row text-center justify-content-around mt-4" id="babyIconContainer">
-    <!-- Medication -->
-    <div class="col-md-2">
+    <!-- Enter a new Medication -->
+    <div class="col-md-3">
         <a href="/babies/{{ $baby_id }}/medications/create">
             <img src="/icons/medication.png" alt="Medication Icon" class="babyBtns" height=150 width=150>
             <h4 class="pt-2 mt-3">Enter Medication</h4>
@@ -17,13 +17,13 @@
 
     <div class="row mt-3 justify-content-center">
         <div class="col-6 text-center">
-            <h1>No Medications Found!</h1>
+            <h1 class="textPrimary">No Medications Found!</h1>
         </div>
     </div>
     @endif
 
     @foreach($medications as $med)
-    <div class="row mt-3 justify-content-between historyBox align-items-center">
+    <div class="row mt-3 justify-content-between historyBox align-items-center shadow">
         <div class="col-md-2 text-center pt-2">
             <h4>{{ $med->name }}</h4>
         </div>
