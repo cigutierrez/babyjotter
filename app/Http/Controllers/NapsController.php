@@ -60,7 +60,7 @@ class NapsController extends Controller
 
         // Check to see if notes is null, and if so, just fill it with a 0.
         // If this is a formula, then breast should not be filled out
-        if (array_key_exists('notes', $validated) == false)
+        if (array_key_exists('notes', $validated) == true && $validated['notes'] == null)
         {
             $validated['notes'] = "";
         }

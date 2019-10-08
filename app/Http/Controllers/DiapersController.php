@@ -35,7 +35,7 @@ class DiapersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($baby_id)
+    public function create($baby_id, Request $request)
     {
         // Verify that the user is the parent of the baby
         $baby = $this->findBaby($baby_id);

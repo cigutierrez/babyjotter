@@ -5,14 +5,9 @@
 <!-- Diaper Controls -->
 <div class="row text-center justify-content-center mt-4" id="babyIconContainer">
     <!-- Enter a new Diaper -->
-    <div class="col-md-3 py-3">
-        <a href="/babies/{{ $baby_id}}/diapers/create">
-            <img src="/icons/diaper_poop.png" alt="Diapers Icon" class="babyBtns" height=150 width=150>
-        </a>
-    </div>
-    <div class="col-md-3 py-3">
-        <a href="/babies/{{ $baby_id}}/diapers/create">
-            <img src="/icons/diaper_pee.png" alt="Diapers Icon" class="babyBtns" height=150 width=150>
+    <div class="col-md-6 py-3">
+        <a href="/babies/{{ $baby_id }}/diapers/create">
+            <img src="/icons/diaper.png" alt="Diapers Icon" class="babyBtns" height=150 width=150>
         </a>
     </div>
     <div class="col-12">
@@ -32,7 +27,7 @@
         <div class="col-md-4 text-center pt-2">
             <h5>Notes: {{ $diaper->notes }}</h5>
         </div>
-        <div class="col-md-2 my-2">
+        <div class="col-md-2 my-2 offset-md-4">
             <a href="/babies/{{ $baby_id }}/diapers/{{ $diaper->id }}/edit" class="btn btn-outline-success btn-block">Edit</a>
         </div>
         <div class="col-md-2 my-md-2 mt-2">
