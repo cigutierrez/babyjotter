@@ -70,6 +70,11 @@ class FeedingsController extends Controller
             $validated['amount'] = 0;
             $validated['measurement'] = 0;
         }
+        // If there is no length
+        if (array_key_exists('length', $validated) == false || $validated['length'] == null)
+        {
+            $validated['length'] = "00:00:00";
+        }
 
         $feeding = Feedings::create($validated);
         return redirect('/babies/'.$request->babyId.'/feedings');

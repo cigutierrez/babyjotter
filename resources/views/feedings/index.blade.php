@@ -2,56 +2,62 @@
 
 @section('content')
 
+<div class="row text-center justify-content-around mt-4" id="babyIconContainer">
+    <!-- Feedings Button -->
+    <div class="col-md-6 py-3">
+        <a href="/babies/{{ $id }}/feedings/create">
+            <img src="/icons/feeding-icon.png" alt="Feedings Icon" class="babyBtns" height=150 width=150>
+            <h4 class="pt-2 mt-3">Enter New Feeding</h4>
+        </a>
+    </div>
+</div>
+
 @foreach($feedings as $feeding)
-<div class="row mt-3 justify-content-center">
-    <!-- Type -->
-    <!-- Time Created -->
-    <!-- Amount -->
-    <!-- Type represented by symbol -->
-    <div class="col-md-1">
-        <!-- TODO: Make the symbol change depending on type -->
-        <img src="/icons/bottle.png" class="img-fluid" alt="" srcset="">
+<div class="row mt-3 justify-content-between historyBox align-items-center shadow">
+    <div class="col-md-2 text-center textPrimary">
+        <h5>{{ ucFirst($feeding->type) }} feeding</h5>
+    </div>
+    @if($feeding->type == 'breast')
+    <div class="col-md-2 text-center textPrimary">
+        <h5>{{ ucFirst($feeding->breast) }}</h5>
+    </div>
+    @endif
+    @if($feeding->type == 'formula')
+    <div class="col-md-2 text-center textPrimary">
+        <h5>{{ $feeding->amount }} {{ $feeding->measurement }}</h5>
+    </div>
+    @endif
+    <div class="col-md-2 text-center textPrimary">
+        <h5>Duration: {{ $feeding->length }}</h5>
     </div>
 
     <!-- Time Created -->
-    <div class="col-md-2">
-        {{ $feeding->created_at }}
+    <div class="col-md-2" id="feedingDate">
+        <h5>{{ date_format(date_create($feeding->created_at), 'g:i A') }}</h5>
     </div>
 
-    <!-- <div class="col-6 text-center"> -->
-    <!-- <h1>{{ $feeding->created_at }}</h1>
-        <p class="lead">{{ $feeding->type }}</p>
-    </div> -->
-    <!-- <div class="col-1">
-        <a href="/babies/{{ $id }}/feedings/{{ $feeding->id }}/" class="btn btn-primary btn-block">Details</a>
+    <!-- Edit Button -->
+    <div class="col-md-2 my-2 ">
+        <a href="/babies/{{ $feeding->baby_id }}/feedings/{{ $feeding->id }}/edit" class="btn btn-outline-success btn-block">Edit</a>
     </div>
-    <div class="col-1">
-        <a href="/babies/{{ $id }}/feedings/{{ $feeding->id }}/edit" class="btn btn-success btn-block">Edit</a>
-    </div> -->
-    <div class="col-1">
+
+    <div class="col-md-2 my-md-2 mt-2">
         <!-- Delete Button -->
         <form action="/babies/{{ $id }}/feedings/{{ $feeding->id }}" method="post">
             @method('DELETE')
             @csrf
 
-            <button id="deleteFeeding" class="btn btn-danger btn-block">DELETE</button>
+            <button id="deleteFeeding" class="btn btn-outline-danger btn-block">DELETE</button>
         </form>
     </div>
 </div>
 @endforeach
+
+<!-- Back Button -->
 <div class="row justify-content-center mt-5">
-    <div class="col-2 px-0">
-        <a href="/babies/{{$id}}/feedings/create" class="btn btn-primary">Enter Feeding</a>
-    </div>
-    <div class="col-2 px-0">
-        <a href="/babies" class="btn btn-primary">Babies</a>
-    </div>
-    <div class="col-2 px-0">
-        <a href="/babies/{{ $id }}" class="btn btn-primary">Back</a>
+    <div class="col">
+        <a href="/babies/{{ $id }}/" class="btn btn-light btn-block shadow textPrimary">Back</a>
     </div>
 </div>
 
-
-
-<!-- Insert navigation here -->
 @endsection

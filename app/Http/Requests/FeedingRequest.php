@@ -30,7 +30,7 @@ class FeedingRequest extends FormRequest
         return [
             'type' => 'required',
             'breast' => 'required_if:type,==,breast',
-            'length' => 'required',
+            'length' => [],
             'amount' => 'required_if:type,==,formula',
             'measurement' => 'required_if:type,==,formula'
         ];

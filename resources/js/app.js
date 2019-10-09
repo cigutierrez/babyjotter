@@ -120,7 +120,7 @@ document.body.onload = function () {
                 }
                  else if (eHour < sHour && eMinute < sMinute) {
                     // In order to get the correct amount of minutes if the minutes in the endTime are less than the minutes in the startTime, we have to peform the following operation: (60 minutes - sMinute - eMinute) / 60 to get the correct hours
-                    totalM = (sMinute - eMinute) / 100;
+                    totalM = (sMinute - eMinute) / 60;
 
                     // In order to get the correct hours, we have to carry a 1
                     totalH = (parseInt(eHour) + 24) - sHour;
@@ -148,7 +148,4 @@ document.body.onload = function () {
             }
         })
     }
-    
-
-
 }
