@@ -5,6 +5,6 @@ A Laravel project developed, designed, and deployed for our CST 499 - Capstone C
 http://www.mybabyjotter.com
 
 # Team Members
-Alfred De La Costa - Developer and Deployment Lead
-Christian Gutierrez - Developer
-Gabriel Quan Juarez - Designer
+Alfred De La Costa - Developer and Deployment Lead<br>
+Christian Gutierrez - Developer<br>
+Gabriel Quan Juarez - Designer<br>
